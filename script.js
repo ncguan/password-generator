@@ -13,7 +13,7 @@ function getTypes() {
     var passUpper = confirm("Click OK to confirm that your password includes uppercase characters.");
     var passNum = confirm("Click OK to confirm that your password includes numeric characters.");
     var passSpecial = confirm("Click OK to confirm that your password includes special characters.");
-    var charType = [passLower, passUpper, passNum, passSpecial];
+    charType = [passLower, passUpper, passNum, passSpecial];
     charChecker();
 
     function charChecker(){
@@ -29,14 +29,31 @@ function getTypes() {
   }
 }
 
-const arrLower = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-const arrUpper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-const arrNum = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,];
-const arrSpecial = [" ","!","\"","#","$","%","&","'","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","\\","]","^","_","`","{","|","}","~"];
+var arrLower = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var arrUpper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+var arrNum = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,];
+var arrSpecial = [" ","!","\"","#","$","%","&","'","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","\\","]","^","_","`","{","|","}","~"];
+var arrGenerate = [];
+function useType() {
+  if (charType[0] == true){
+    arrGenerate.push(arrLower);
+  }
+  if (charType[1] == true){
+    arrGenerate.push(arrLower);
+  }
+  if (charType[2] == true){
+    arrGenerate.push(arrNum);
+  }
+  if (charType[3] == true){
+    arrGenerate.push(arrSpecial);
+  }
+}
 
 function generatePassword(){
   getLength();
   getTypes();
+  useType();
+  console.log(arrGenerate)
 }
 
 // Get references to the #generate element
