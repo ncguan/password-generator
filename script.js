@@ -74,6 +74,10 @@ var stringPassword;
 function generatePassword(){
   var length = getLength();
   getTypes();
+  var numLower = [];
+  var numUpper = [];
+  var numNum = [];
+  var numSpecial = [];
 
   arrPassword.length = length;
   for (var i = 0; i < arrPassword.length; i++){
@@ -92,7 +96,81 @@ function generatePassword(){
       var charIndex = Math.floor(Math.random() * arrSpecial.length);
     }
     arrPassword[i]=arrGenerate[randGenIndex][charIndex];
+
+    if (arrLower.includes(arrPassword[i])) {
+      numLower.push(i);
+    }
+    if (arrUpper.includes(arrPassword[i])) {
+      numUpper.push(i);
+    }
+    if (arrNum.includes(arrPassword[i])) {
+      numNum.push(i);
+    }
+    if (arrSpecial.includes(arrPassword[i])) {
+      numSpecial.push(i);
+    }
   }
+
+  if (containType[0]==true && numLower.length==0){
+    if (numUpper.length>1){
+      var charIndex = Math.floor(Math.random() * arrLower.length);
+      arrPassword[numUpper[0]]=arrLower[charIndex];
+    }
+    else if (numNum.length>1){
+      var charIndex = Math.floor(Math.random() * arrLower.length);
+      arrPassword[numNum[0]]=arrLower[charIndex];
+    }
+    else if (numSpecial.length>1){
+      var charIndex = Math.floor(Math.random() * arrLower.length);
+      arrPassword[numSpecial[0]]=arrLower[charIndex];
+    }
+  }
+
+  if (containType[1]==true && numUpper.length==0){
+    if (numLower.length>1){
+      var charIndex = Math.floor(Math.random() * arrUpper.length);
+      arrPassword[numLower[0]]=arrUpper[charIndex];
+    }
+    else if (numNum.length>1){
+      var charIndex = Math.floor(Math.random() * arrUpper.length);
+      arrPassword[numNum[0]]=arrUpper[charIndex];
+    }
+    else if (numSpecial.length>1){
+      var charIndex = Math.floor(Math.random() * arrUpper.length);
+      arrPassword[numSpecial[0]]=arrUpper[charIndex];
+    }
+  }
+
+  if (containType[2]==true && numNum.length==0){
+    if (numUpper.length>1){
+      var charIndex = Math.floor(Math.random() * arrNum.length);
+      arrPassword[numUpper[0]]=arrNum[charIndex];
+    }
+    else if (numLower.length>1){
+      var charIndex = Math.floor(Math.random() * arrNum.length);
+      arrPassword[numLower[0]]=arrNum[charIndex];
+    }
+    else if (numSpecial.length>1){
+      var charIndex = Math.floor(Math.random() * arrNum.length);
+      arrPassword[numSpecial[0]]=arrNum[charIndex];
+    }
+  }
+
+  if (containType[3]==true && numSpecial.length==0){
+    if (numUpper.length>1){
+      var charIndex = Math.floor(Math.random() * arrSpecial.length);
+      arrPassword[numUpper[0]]=arrSpecial[charIndex];
+    }
+    else if (numNum.length>1){
+      var charIndex = Math.floor(Math.random() * arrSpecial.length);
+      arrPassword[numNum[0]]=arrSpecial[charIndex];
+    }
+    else if (numLower.length>1){
+      var charIndex = Math.floor(Math.random() * arrSpecial.length);
+      arrPassword[numLower[0]]=arrSpecial[charIndex];
+    }
+  }
+  
   return stringPassword = arrPassword.join("");
 }
 
