@@ -57,37 +57,28 @@ function generate(){
   getTypes();
   useType();
 
-  function randIndex(){
-    if(charType[0] == true) {
-      var charIndex = Math.floor(Math.random() * arrLower.length);
-      return charIndex;
-    }
-    else if(charType[1] == true) {
-      var charIndex = Math.floor(Math.random() * arrUpper.length);
-      return charIndex;
-    }
-    else if(charType[2] == true) {
-      var charIndex = Math.floor(Math.random() * arrNum.length);
-      return charIndex;
-    }
-    else {
-      var charIndex = Math.floor(Math.random() * arrSpecial.length);
-      return charIndex;
-    }
-  }
-
   arrPassword.length = length;
   for (var i = 0; i < arrPassword.length; i++){
     var randGenIndex = Math.floor(Math.random() * arrGenerate.length);
-    var charIndex = randIndex();
+    var randArr = arrGenerate[randGenIndex];
+    if (randArr.includes("a")){
+      var charIndex = Math.floor(Math.random() * arrLower.length);
+    }
+    else if (randArr.includes("A")){
+      var charIndex = Math.floor(Math.random() * arrUpper.length);
+    }
+    else if (randArr.includes(0)){
+      var charIndex = Math.floor(Math.random() * arrNum.length);
+    }
+    else if (randArr.includes(" ")){
+      var charIndex = Math.floor(Math.random() * arrSpecial.length);
+    }
+    //var charIndex = randIndex();
     arrPassword[i]=arrGenerate[randGenIndex][charIndex];
   }
 
 }
-
-
-
-
+ 
 function generatePassword(){
   generate();
   console.log(arrGenerate);
