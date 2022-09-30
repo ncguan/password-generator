@@ -68,38 +68,32 @@ var arrLower = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p",
 var arrUpper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var arrNum = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,];
 var arrSpecial = [" ","!","\"","#","$","%","&","'","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","\\","]","^","_","`","{","|","}","~"];
-var arrGenerate = [];
 
 var arrPassword = [];
-function generate(){
+var stringPassword;
+function generatePassword(){
   var length = getLength();
   getTypes();
 
   arrPassword.length = length;
   for (var i = 0; i < arrPassword.length; i++){
-      var randGenIndex = Math.floor(Math.random() * arrGenerate.length);
-      var randArr = arrGenerate[randGenIndex];
-      if (randArr.includes("a")){
-        var charIndex = Math.floor(Math.random() * arrLower.length);
-      }
-      else if (randArr.includes("A")){
-        var charIndex = Math.floor(Math.random() * arrUpper.length);
-      }
-      else if (randArr.includes(0)){
-        var charIndex = Math.floor(Math.random() * arrNum.length);
-      }
-      else if (randArr.includes(" ")){
-        var charIndex = Math.floor(Math.random() * arrSpecial.length);
-      }
-      arrPassword[i]=arrGenerate[randGenIndex][charIndex];
+    var randGenIndex = Math.floor(Math.random() * arrGenerate.length);
+    var randArr = arrGenerate[randGenIndex];
+    if (randArr.includes("a")){
+      var charIndex = Math.floor(Math.random() * arrLower.length);
+    }
+    else if (randArr.includes("A")){
+      var charIndex = Math.floor(Math.random() * arrUpper.length);
+    }
+    else if (randArr.includes(0)){
+      var charIndex = Math.floor(Math.random() * arrNum.length);
+    }
+    else if (randArr.includes(" ")){
+      var charIndex = Math.floor(Math.random() * arrSpecial.length);
+    }
+    arrPassword[i]=arrGenerate[randGenIndex][charIndex];
   }
-}
-
-function generatePassword(){
-  generate();
-  console.log(arrGenerate);
-  console.log(arrPassword);
-  console.log(containType);
+  return stringPassword = arrPassword.join("");
 }
 
 // Get references to the #generate element
