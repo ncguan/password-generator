@@ -1,9 +1,11 @@
 function getLength(){
   var passLength = prompt("How many characters is your password? Pick a number from 8 to 128.");
   while (passLength <8 || passLength>128 || isNaN(passLength)==true){
-    passLength = prompt("How many characters is your password? Pick a number from 8 to 128.")
+  var passLength = prompt("How many characters is your password? Pick a number from 8 to 128.")
   }
+  return passLength
 }
+
 
 function getTypes() {
   var charCheck = false
@@ -49,11 +51,47 @@ function useType() {
   }
 }
 
-function generatePassword(){
-  getLength();
+var arrPassword = [];
+function generate(){
+  var length = getLength();
   getTypes();
   useType();
-  console.log(arrGenerate)
+
+  function randIndex(){
+    if(charType[0] == true) {
+      var charIndex = Math.floor(Math.random() * arrLower.length);
+      return charIndex;
+    }
+    else if(charType[1] == true) {
+      var charIndex = Math.floor(Math.random() * arrUpper.length);
+      return charIndex;
+    }
+    else if(charType[2] == true) {
+      var charIndex = Math.floor(Math.random() * arrNum.length);
+      return charIndex;
+    }
+    else {
+      var charIndex = Math.floor(Math.random() * arrSpecial.length);
+      return charIndex;
+    }
+  }
+
+  arrPassword.length = length;
+  for (var i = 0; i < arrPassword.length; i++){
+    var randGenIndex = Math.floor(Math.random() * arrGenerate.length);
+    var charIndex = randIndex();
+    arrPassword[i]=arrGenerate[randGenIndex][charIndex];
+  }
+
+}
+
+
+
+
+function generatePassword(){
+  generate();
+  console.log(arrGenerate);
+  console.log(arrPassword);
 }
 
 // Get references to the #generate element
@@ -70,4 +108,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
