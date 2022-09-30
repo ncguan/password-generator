@@ -6,7 +6,8 @@ function getLength(){
   return passLength
 }
 
-
+var arrGenerate = [];
+var containType = [];
 function getTypes() {
   var charCheck = false
   while (charCheck==false){
@@ -15,7 +16,7 @@ function getTypes() {
     var passUpper = confirm("Click OK to confirm that your password includes uppercase characters.");
     var passNum = confirm("Click OK to confirm that your password includes numeric characters.");
     var passSpecial = confirm("Click OK to confirm that your password includes special characters.");
-    charType = [passLower, passUpper, passNum, passSpecial];
+    var charType = [passLower, passUpper, passNum, passSpecial];
     charChecker();
 
     function charChecker(){
@@ -29,6 +30,38 @@ function getTypes() {
       }
     }
   }
+  
+  if (charType[0] == true){
+    arrGenerate.push(arrLower);
+    containType.push(passLower);
+  }
+  if (charType[0] == false){
+    containType.push(passLower);
+  }
+
+  if (charType[1] == true){
+    arrGenerate.push(arrUpper);
+    containType.push(passUpper);
+  }
+  if (charType[1] == false){
+    containType.push(passUpper);
+  }
+
+  if (charType[2] == true){
+    arrGenerate.push(arrNum);
+    containType.push(passNum);
+  }
+  if (charType[2] == false){
+    containType.push(passNum);
+  }
+
+  if (charType[3] == true){
+    arrGenerate.push(arrSpecial);
+    containType.push(passSpecial);
+  }
+  if (charType[3] == false){
+    containType.push(passSpecial);
+  }
 }
 
 var arrLower = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
@@ -36,53 +69,37 @@ var arrUpper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P",
 var arrNum = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,];
 var arrSpecial = [" ","!","\"","#","$","%","&","'","(",")","*","+",",","-",".","/",":",";","<","=",">","?","@","[","\\","]","^","_","`","{","|","}","~"];
 var arrGenerate = [];
-function useType() {
-  if (charType[0] == true){
-    arrGenerate.push(arrLower);
-  }
-  if (charType[1] == true){
-    arrGenerate.push(arrLower);
-  }
-  if (charType[2] == true){
-    arrGenerate.push(arrNum);
-  }
-  if (charType[3] == true){
-    arrGenerate.push(arrSpecial);
-  }
-}
 
 var arrPassword = [];
 function generate(){
   var length = getLength();
   getTypes();
-  useType();
 
   arrPassword.length = length;
   for (var i = 0; i < arrPassword.length; i++){
-    var randGenIndex = Math.floor(Math.random() * arrGenerate.length);
-    var randArr = arrGenerate[randGenIndex];
-    if (randArr.includes("a")){
-      var charIndex = Math.floor(Math.random() * arrLower.length);
-    }
-    else if (randArr.includes("A")){
-      var charIndex = Math.floor(Math.random() * arrUpper.length);
-    }
-    else if (randArr.includes(0)){
-      var charIndex = Math.floor(Math.random() * arrNum.length);
-    }
-    else if (randArr.includes(" ")){
-      var charIndex = Math.floor(Math.random() * arrSpecial.length);
-    }
-    //var charIndex = randIndex();
-    arrPassword[i]=arrGenerate[randGenIndex][charIndex];
+      var randGenIndex = Math.floor(Math.random() * arrGenerate.length);
+      var randArr = arrGenerate[randGenIndex];
+      if (randArr.includes("a")){
+        var charIndex = Math.floor(Math.random() * arrLower.length);
+      }
+      else if (randArr.includes("A")){
+        var charIndex = Math.floor(Math.random() * arrUpper.length);
+      }
+      else if (randArr.includes(0)){
+        var charIndex = Math.floor(Math.random() * arrNum.length);
+      }
+      else if (randArr.includes(" ")){
+        var charIndex = Math.floor(Math.random() * arrSpecial.length);
+      }
+      arrPassword[i]=arrGenerate[randGenIndex][charIndex];
   }
-
 }
- 
+
 function generatePassword(){
   generate();
   console.log(arrGenerate);
   console.log(arrPassword);
+  console.log(containType);
 }
 
 // Get references to the #generate element
